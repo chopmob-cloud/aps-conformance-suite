@@ -14,7 +14,7 @@
     "headers": {
       "host": "api.algovoi.co.uk",
       "content-digest": "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:",
-      "signature-input": "(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"created\");created=1778955520;keyid=\"did:web:api.algovoi.co.uk\";alg=\"ed25519\"",
+      "signature-input": "sig=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"created\");created=1778955520;keyid=\"did:web:api.algovoi.co.uk\";alg=\"ed25519\"",
       "signature": "sig=:Xj1peMjEYi75R/QQFYpU9q/gHwQKYwgt1etjAX1qc0zugTMJoJ86Uhy/jTZ175b3zFhp0j8cLjmDJvGmySDBAQ==:"
     }
   },

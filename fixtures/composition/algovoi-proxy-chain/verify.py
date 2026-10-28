@@ -115,9 +115,25 @@ def verify_fixture():
 
     print()
 
+    # Verify the RFC 9421 HTTP headers agree with the signed fixture.
+    signing = request_fixture["signing"]
+    headers = request_fixture["request"]["headers"]
+    expected_signature_input = (
+        f'sig=("@method" "@authority" "@path" "content-digest" "created");'
+        f'created={signing["timestamp"]};keyid="did:web:api.algovoi.co.uk";alg="ed25519"'
+    )
+    if headers.get("signature-input") != expected_signature_input:
+        print("[FAIL] RFC 9421 Signature-Input does not match the signed fixture")
+        return False
+    expected_signature_header = f'sig=:{signing["signature_value_b64"]}:'
+    if headers.get("signature") != expected_signature_header:
+        print("[FAIL] RFC 9421 Signature header does not match the signed fixture")
+        return False
+    print("[OK] RFC 9421 signature headers match the signed fixture")
+
     # Verify Ed25519 signature
-    signing_base = request_fixture["signing"]["signing_base"]
-    expected_sig_b64 = request_fixture["signing"]["signature_value_b64"]
+    signing_base = signing["signing_base"]
+    expected_sig_b64 = signing["signature_value_b64"]
 
     if not verify_ed25519_signature(signing_base, expected_sig_b64):
         return False
